@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package pokemon;
+
+option go_package = "./proto";
+
+service PokemonService {
+    rpc CreatePokemon (CreatePokemonRequest) returns (Pokemon) {}
+    rpc GetPokemon (GetPokemonRequest) returns (Pokemon) {}
+    rpc UpdatePokemon (UpdatePokemonRequest) returns (Pokemon) {}
+    rpc DeletePokemon (DeletePokemonRequest) returns (DeletePokemonResponse) {}
+    rpc ListPokemon (ListPokemonRequest) returns (ListPokemonResponse) {}
+}
+
+message Pokemon {
+    int32 id = 1;
+    string name = 2;
+    string type = 3;
+    int32 hp = 4;
+}
+
+message CreatePokemonRequest {
+    string name = 1;
+    string type = 2;
+    int32 hp = 3;
+}
+
+message GetPokemonRequest {
+    int32 id = 1;
+}
+
+message UpdatePokemonRequest {
+    int32 id = 1;
+    string name = 2;
+    string type = 3;
+    int32 hp = 4;
+}
+
+message DeletePokemonRequest {
+    int32 id = 1;
+}
+
+message DeletePokemonResponse {
+    bool success = 1;
+}
+
+message ListPokemonRequest {
+    int32 page_size = 1;
+    int32 page_number = 2;
+}
+
+message ListPokemonResponse {
+    repeated Pokemon pokemon = 1;
+}
